@@ -18,7 +18,9 @@ export class UserService {
   }
 
   async findById(id: number): Promise<User | undefined> {
-    return this.userRepository.findOne({ where: { id } });
+    const user = await this.userRepository.findOne({ where: { id } });
+    delete user.password;
+    return user;
   }
 
   async getAllUsers(): Promise<User[]> {
