@@ -33,7 +33,9 @@ export class UserService {
 
   async updateAddress(id: number, address: string): Promise<User | undefined> {
     await this.userRepository.update(id, { address });
-    return this.userRepository.findOne({ where: { id } });
+    const updatedUser = await this.userRepository.findOne({ where: { id } });
+    delete updatedUser.password;
+    return updatedUser;
   }
 
   async delete(id: number): Promise<void> {

@@ -5,6 +5,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { Role } from '../enum/roles.enum';
 
 export class CreateUserDto {
   @IsString()
@@ -34,4 +35,8 @@ export class CreateUserDto {
   @MinLength(8)
   @MaxLength(20)
   password: string;
+
+  @IsString()
+  @IsNotEmpty()
+  role: Role;
 }
