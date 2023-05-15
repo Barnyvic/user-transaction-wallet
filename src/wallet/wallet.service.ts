@@ -1,8 +1,10 @@
 import {
   HttpException,
   HttpStatus,
+  Inject,
   Injectable,
   NotFoundException,
+  forwardRef,
 } from '@nestjs/common';
 import { TransactionService } from '../transaction/transaction.service';
 import { Wallet } from './wallet.entity';
@@ -19,6 +21,7 @@ export default class WalletService {
     private readonly transactionService: TransactionService,
     @InjectRepository(Wallet)
     private readonly walletRepository: Repository<Wallet>,
+    @Inject(forwardRef(() => UserService))
     private readonly userService: UserService,
   ) {}
   async fundWallet(user: User, walletDto: FundWalletDto) {
@@ -42,6 +45,10 @@ export default class WalletService {
 
     await this.walletRepository.save(newWallet);
     return newWallet.balance;
+  }
+
+  async getWalletByUserId(user): Promise<Wallet> {
+    return this.walletRepository.findOne({ where: { user: user } });
   }
 
   async debitWallet(user: User, walletDto: DebitWalletDto): Promise<Wallet> {
