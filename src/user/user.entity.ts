@@ -5,10 +5,12 @@ import {
   OneToOne,
   JoinColumn,
   OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Role } from './enum/roles.enum';
 import { Wallet } from '../wallet/wallet.entity';
-import { Transaction } from '../Transaction/transaction.entity';
+import { TransactionEntity } from '../Transaction/transaction.entity';
 
 @Entity()
 export class User {
@@ -34,12 +36,17 @@ export class User {
   role: Role;
 
   @OneToOne(() => Wallet, { cascade: true })
-  @JoinColumn()
   wallet: Wallet;
 
-  @OneToMany(() => Transaction, (transaction) => transaction.user)
-  transactions: Transaction[];
+  @OneToMany(() => TransactionEntity, (transaction) => transaction.user)
+  transactions: TransactionEntity[];
 
   @Column({ default: 0 })
   balance: number;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

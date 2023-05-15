@@ -29,7 +29,7 @@ export class UserController {
   @UseGuards(AuthGuard(), RolesGuard)
   @Roles(Role.USER)
   updateUser(@Req() req, @Body() addressDto: AddressDto) {
-    return this.userService.updateAddress(req.user, addressDto.address);
+    return this.userService.updateAddress(req.user.id, addressDto.address);
   }
   // for admin
   @Get('all-users')

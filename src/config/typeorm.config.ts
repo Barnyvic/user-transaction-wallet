@@ -1,6 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { User } from '../user/user.entity';
-import { Transaction } from '../Transaction/transaction.entity';
+import { TransactionEntity } from '../Transaction/transaction.entity';
 import { Wallet } from '../wallet/wallet.entity';
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
@@ -12,5 +12,6 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   database: 'UserTransaction',
   synchronize: true,
   logging: true,
-  entities: [User, Wallet, Transaction],
+  entities: [TransactionEntity, User, Wallet],
+  autoLoadEntities: true,
 };

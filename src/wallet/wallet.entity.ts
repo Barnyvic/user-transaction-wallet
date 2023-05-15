@@ -1,4 +1,4 @@
-import { Transaction } from '../Transaction/transaction.entity';
+import { TransactionEntity } from '../Transaction/transaction.entity';
 import { User } from '../user/user.entity';
 import {
   Entity,
@@ -7,6 +7,8 @@ import {
   JoinColumn,
   OneToMany,
   PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -15,12 +17,18 @@ export class Wallet {
   id: number;
 
   @OneToOne(() => User)
-  @JoinColumn()
   user: User;
 
-  @OneToMany(() => Transaction, (transaction) => transaction.wallet)
-  transactions: Transaction[];
+  @OneToMany(() => TransactionEntity, (transaction) => transaction.id)
+  @JoinColumn()
+  transactions: TransactionEntity[];
 
-  @Column({ default: 0 })
+  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0 })
   balance: number;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }
