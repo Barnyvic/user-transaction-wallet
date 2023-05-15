@@ -74,10 +74,20 @@ export class TransactionService {
     const queryBuilder = this.transactionRepository
       .createQueryBuilder('transaction')
       .leftJoinAndSelect('transaction.user', 'user')
-      .leftJoinAndSelect('transaction.wallet', 'wallet')
       .where('user.id = :userId', { userId })
       .orderBy('transaction.createdAt', 'DESC');
 
     return paginate<TransactionEntity>(queryBuilder, options);
+  }
+
+  async getUserTransactionDetails(
+    userId: number,
+  ): Promise<TransactionEntity[]> {
+    return this.transactionRepository.find({
+      where: {
+        user: { id: userId },
+      },
+      relations: ['user'],
+    });
   }
 }

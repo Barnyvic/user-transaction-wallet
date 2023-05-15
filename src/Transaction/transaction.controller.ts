@@ -3,6 +3,9 @@ import { TransactionService } from './transaction.service';
 import { AuthGuard } from '@nestjs/passport';
 import { TransactionEntity } from './transaction.entity';
 import { Pagination } from 'nestjs-typeorm-paginate';
+import { RolesGuard } from '../auth/guards/role.guards';
+import { Role } from '../user/enum/roles.enum';
+import { Roles } from '../auth/guards/role-decorator';
 
 @Controller('transaction')
 export class TransactionController {
@@ -15,7 +18,8 @@ export class TransactionController {
   }
 
   @Get('/transactions')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard(), RolesGuard)
+  @Roles(Role.ADMIN)
   getTransactions(
     @Req() req,
     @Query('page') page = 1,

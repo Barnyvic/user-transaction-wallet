@@ -7,6 +7,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../user/user.entity';
 import { AuthController } from './auth.controller';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
 
 @Module({
   imports: [
@@ -14,7 +16,7 @@ import { AuthController } from './auth.controller';
     PassportModule.register({ defaultStrategy: 'jwt' }),
     forwardRef(() =>
       JwtModule.register({
-        secret: 'djgcweuileckwucb',
+        secret: process.env.JWT_SECRET,
         signOptions: { expiresIn: '1d' },
       }),
     ),

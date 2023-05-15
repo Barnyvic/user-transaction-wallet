@@ -22,7 +22,7 @@ export class UserController {
   @UseGuards(AuthGuard(), RolesGuard)
   @Roles(Role.USER)
   hello(@Req() req) {
-    return this.userService.findById(req.user.id);
+    return this.userService.findByUser(req.user.id);
   }
 
   @Put('update-user')

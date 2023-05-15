@@ -1,17 +1,19 @@
-import { Inject, Injectable, forwardRef } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  NotFoundException,
+  forwardRef,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
-import WalletService from '../wallet/wallet.service';
 import { TransactionService } from '../transaction/transaction.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
-    @Inject(forwardRef(() => WalletService))
-    private walletService: WalletService,
     @Inject(forwardRef(() => TransactionService))
     private transactionService: TransactionService,
   ) {}
@@ -27,6 +29,14 @@ export class UserService {
     const user = await this.userRepository.findOne({ where: { id } });
     delete user.password;
     return user;
+  }
+
+  async findByUser(id: number) {
+    const user = await this.userRepository.findOne({ where: { id } });
+    const transactions =
+      await this.transactionService.getUserTransactionDetails(id);
+    delete user.password;
+    return { user, transactions };
   }
 
   async getAllUsers(): Promise<User[]> {
@@ -49,6 +59,12 @@ export class UserService {
   }
 
   async updateUserBalance(id: number, balance: number): Promise<void> {
-    await this.userRepository.update(id, { balance });
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    user.balance += balance;
+    await this.userRepository.save(user);
   }
 }
