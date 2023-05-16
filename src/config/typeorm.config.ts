@@ -7,9 +7,9 @@ require('dotenv').config();
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: 'postgres',
-  host: 'localhost',
+  host: 'drona.db.elephantsql.com',
   port: 5432,
-  username: 'postgres',
+  username: 'nsizipmy',
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
   synchronize: true,

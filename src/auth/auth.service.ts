@@ -27,7 +27,7 @@ export class AuthService {
     Object.assign(createUser, body);
     createUser.password = hashedPassword;
     await this.userService.createUser(createUser);
-
+    delete createUser.password;
     return {
       message: 'User created successfully',
       createUser,
