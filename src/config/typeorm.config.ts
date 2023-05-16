@@ -1,7 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { User } from '../user/user.entity';
-import { TransactionEntity } from '../Transaction/transaction.entity';
 import { Wallet } from '../wallet/wallet.entity';
+import { TransactionEntity } from '../transactions/transactions-entity';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 

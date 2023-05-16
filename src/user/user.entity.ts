@@ -3,14 +3,13 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToOne,
-  JoinColumn,
   OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Role } from './enum/roles.enum';
 import { Wallet } from '../wallet/wallet.entity';
-import { TransactionEntity } from '../Transaction/transaction.entity';
+import { TransactionEntity } from 'src/transactions/transactions-entity';
 
 @Entity()
 export class User {

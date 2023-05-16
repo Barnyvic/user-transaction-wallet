@@ -8,14 +8,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
-import { TransactionService } from '../transaction/transaction.service';
+import { TransactionsService } from 'src/transactions/transactions.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
-    @Inject(forwardRef(() => TransactionService))
-    private transactionService: TransactionService,
+    @Inject(forwardRef(() => TransactionsService))
+    private transactionService: TransactionsService,
   ) {}
   async createUser(user: CreateUserDto): Promise<User> {
     return this.userRepository.save(user);

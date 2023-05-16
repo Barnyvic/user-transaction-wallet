@@ -7,7 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './config/typeorm.config';
 import { WalletModule } from './wallet/wallet.module';
 import { ConfigModule } from '@nestjs/config';
-import { TransactionModule } from './transaction/transaction.module';
+import { TransactionsModule } from './transactions/transactions.module';
 
 @Module({
   imports: [
@@ -15,10 +15,10 @@ import { TransactionModule } from './transaction/transaction.module';
     UserModule,
     AuthModule,
     WalletModule,
-    TransactionModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    TransactionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

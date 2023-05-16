@@ -1,9 +1,10 @@
 import { Inject, Injectable, forwardRef } from '@nestjs/common';
-import { User } from '../user/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UserService } from 'src/user/user.service';
 import { Repository } from 'typeorm';
-import { TransactionEntity } from './transaction.entity';
-import { UserService } from '../user/user.service';
+import { TransactionEntity } from './transactions-entity';
+import { User } from '../user/user.entity';
+
 import {
   IPaginationOptions,
   Pagination,
@@ -11,7 +12,7 @@ import {
 } from 'nestjs-typeorm-paginate';
 
 @Injectable()
-export class TransactionService {
+export class TransactionsService {
   constructor(
     @InjectRepository(TransactionEntity)
     private readonly transactionRepository: Repository<TransactionEntity>,

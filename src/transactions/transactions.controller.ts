@@ -1,15 +1,15 @@
-import { Controller, Get, Post, Query, Req, UseGuards } from '@nestjs/common';
-import { TransactionService } from './transaction.service';
-import { AuthGuard } from '@nestjs/passport';
-import { TransactionEntity } from './transaction.entity';
+import { TransactionsService } from './transactions.service';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { RolesGuard } from '../auth/guards/role.guards';
 import { Role } from '../user/enum/roles.enum';
 import { Roles } from '../auth/guards/role-decorator';
+import { AuthGuard } from '@nestjs/passport';
+import { Controller, Get, Post, Query, Req, UseGuards } from '@nestjs/common';
+import { TransactionEntity } from './transactions-entity';
 
-@Controller('transaction')
-export class TransactionController {
-  constructor(private readonly transactionService: TransactionService) {}
+@Controller('transactions')
+export class TransactionsController {
+  constructor(private readonly transactionService: TransactionsService) {}
 
   @Post('generate_transaction_ref')
   @UseGuards(AuthGuard())

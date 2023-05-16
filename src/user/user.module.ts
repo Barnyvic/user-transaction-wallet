@@ -5,9 +5,9 @@ import { User } from './user.entity';
 import { UserController } from './user.controller';
 import { AuthModule } from '../auth/auth.module';
 import { WalletModule } from '../wallet/wallet.module';
-import { TransactionModule } from 'src/transaction/transaction.module';
-import { TransactionEntity } from '../Transaction/transaction.entity';
 import { Wallet } from '../wallet/wallet.entity';
+import { TransactionsModule } from 'src/transactions/transactions.module';
+import { TransactionEntity } from 'src/transactions/transactions-entity';
 
 @Module({
   imports: [
@@ -16,7 +16,7 @@ import { Wallet } from '../wallet/wallet.entity';
     TypeOrmModule.forFeature([Wallet]),
     forwardRef(() => AuthModule),
     forwardRef(() => WalletModule),
-    forwardRef(() => TransactionModule),
+    forwardRef(() => TransactionsModule),
   ],
   providers: [UserService],
   exports: [UserService],

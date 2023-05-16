@@ -6,7 +6,6 @@ import {
   NotFoundException,
   forwardRef,
 } from '@nestjs/common';
-import { TransactionService } from 'src/transaction/transaction.service';
 import { Wallet } from './wallet.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -14,11 +13,12 @@ import { UserService } from '../user/user.service';
 import { User } from 'src/user/user.entity';
 import { FundWalletDto } from './dto/fundwallet.dto';
 import { DebitWalletDto } from './dto/debitwallet.dto';
+import { TransactionsService } from 'src/transactions/transactions.service';
 
 @Injectable()
 export default class WalletService {
   constructor(
-    private readonly transactionService: TransactionService,
+    private readonly transactionService: TransactionsService,
     @InjectRepository(Wallet)
     private readonly walletRepository: Repository<Wallet>,
     @Inject(forwardRef(() => UserService))

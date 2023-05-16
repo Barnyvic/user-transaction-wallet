@@ -1,4 +1,4 @@
-import { TransactionEntity } from '../Transaction/transaction.entity';
+import { TransactionEntity } from 'src/transactions/transactions-entity';
 import { User } from '../user/user.entity';
 import {
   Entity,
