@@ -5,7 +5,7 @@ import { User } from './user.entity';
 import { UserController } from './user.controller';
 import { AuthModule } from '../auth/auth.module';
 import { WalletModule } from '../wallet/wallet.module';
-import { TransactionModule } from '../transaction/transaction.module';
+import { TransactionModule } from 'src/transaction/transaction.module';
 import { TransactionEntity } from '../Transaction/transaction.entity';
 import { Wallet } from '../wallet/wallet.entity';
 

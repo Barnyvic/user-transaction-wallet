@@ -6,7 +6,7 @@ import {
   NotFoundException,
   forwardRef,
 } from '@nestjs/common';
-import { TransactionService } from '../transaction/transaction.service';
+import { TransactionService } from 'src/transaction/transaction.service';
 import { Wallet } from './wallet.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
