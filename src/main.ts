@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import helmet from 'helmet';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
@@ -15,7 +14,6 @@ async function bootstrap() {
     }),
   );
   app.setGlobalPrefix('api/v1');
-  app.use(helmet());
   await app.listen(3000);
 }
 bootstrap();
