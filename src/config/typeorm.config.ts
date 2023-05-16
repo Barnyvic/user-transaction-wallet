@@ -7,9 +7,9 @@ require('dotenv').config();
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: 'postgres',
-  host: 'dpg-chgd6dik728sd6gpdo90-a',
+  host: 'localhost',
   port: 5432,
-  username: 'victor123',
+  username: 'postgres',
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
   synchronize: true,

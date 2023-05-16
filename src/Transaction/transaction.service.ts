@@ -56,7 +56,7 @@ export class TransactionService {
     }
 
     const expirationDate = new Date(transaction.createdAt);
-    expirationDate.setSeconds(expirationDate.getSeconds() + 150);
+    expirationDate.setSeconds(expirationDate.getSeconds() + 15);
 
     const currentDate = new Date();
 
